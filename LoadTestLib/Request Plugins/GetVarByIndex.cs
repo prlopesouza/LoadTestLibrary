@@ -44,6 +44,22 @@ namespace LoadTestLib.Request_Plugins
             set { _preRequest = value; }
         }
 
+        private bool _useGroups;
+        [Description("Deve ser utilizado um sufixo de grupo em um indice específico. Ex: _g1")]
+        public bool useGroups
+        {
+            get { return _useGroups; }
+            set { _useGroups = value; }
+        }
+
+        private int _groupIndex;
+        [Description("Índice do grupo a ser utilizado.")]
+        public int groupIndex
+        {
+            get { return _groupIndex; }
+            set { _groupIndex = value; }
+        }
+
         public override void PreRequest(object sender, PreRequestEventArgs e)
         {
             if (_preRequest)
@@ -53,10 +69,18 @@ namespace LoadTestLib.Request_Plugins
                 {
                     ind = e.WebTest.Context[_Index.Replace("{{", "").Replace("}}", "")].ToString();
                 }
-                string val = e.WebTest.Context[_Variable + "_" + ind].ToString();
+                string val = "";
+                if (_useGroups)
+                {
+                    val = e.WebTest.Context[_Variable + "_" + ind + "_g" + _groupIndex].ToString();
+                }
+                else
+                {
+                    val = e.WebTest.Context[_Variable + "_" + ind].ToString();
+                }
 
                 e.WebTest.Context[_ResultVariable] = val;
-                e.Request.Url.Replace("{{" + _ResultVariable + "}}", val);
+                e.Request.UrlWithQueryString.Replace("{{" + _ResultVariable + "}}", val);
             }
 
             base.PreRequest(sender, e);
@@ -71,7 +95,15 @@ namespace LoadTestLib.Request_Plugins
                 {
                     ind = e.WebTest.Context[_Index.Replace("{{", "").Replace("}}", "")].ToString();
                 }
-                string val = e.WebTest.Context[_Variable + "_" + ind].ToString();
+                string val = "";
+                if (_useGroups)
+                {
+                    val = e.WebTest.Context[_Variable + "_" + ind + "_g" + _groupIndex].ToString();
+                }
+                else
+                {
+                    val = e.WebTest.Context[_Variable + "_" + ind].ToString();
+                }
 
                 e.WebTest.Context[_ResultVariable] = val;
             }

@@ -35,8 +35,10 @@ namespace PromocaoZaad_Plugin
         {
             string response = e.Response.BodyString;
 
-            Regex rxSelect = new Regex("<select[^>]+[name|id]=\"" + _SelectName + "\"[^>]*>([\\s\\S]+?<\\/select>)");  
-            Regex rxOption = new Regex("<option[^>]+value=\"(?!" + _ExcludeOption + ")([^\"]+)");
+            Regex rxSelect = new Regex("<select[^>]+[name|id]=\"" + _SelectName + "\"[^>]*>([\\s\\S]+?<\\/select>)");
+            if (!_ExcludeOption.Equals("")) _ExcludeOption = "(?!" + _ExcludeOption + ")";
+            Regex rxOption = new Regex("<option[^>]+value=\"" + _ExcludeOption + "([^\"]+)");
+            
 
             MatchCollection select = rxSelect.Matches(response);
             if (select.Count==0)
