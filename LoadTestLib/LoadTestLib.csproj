@@ -49,6 +49,7 @@
     <Compile Include="Extraction Rules\ExtractResponseCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request Plugins\AddDynamicParameters.cs" />
+    <Compile Include="Request Plugins\AddCookie.cs" />
     <Compile Include="Request Plugins\GetVarByIndex.cs" />
     <Compile Include="Request Plugins\Increment.cs" />
     <Compile Include="Request Plugins\PaymentData.cs" />

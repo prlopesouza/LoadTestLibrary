@@ -49,7 +49,7 @@ namespace LoadTestLib.Request_Plugins
 
         public override void PostRequest(object sender, PostRequestEventArgs e)
         {
-            if (!_preRequest)
+            if (!_preRequest && e.Response.StatusCode!=System.Net.HttpStatusCode.Redirect)
             {
                 int val = int.Parse(e.WebTest.Context[_Variable].ToString());
 
