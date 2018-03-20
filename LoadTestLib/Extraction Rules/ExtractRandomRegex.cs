@@ -29,6 +29,14 @@ namespace LoadTestLib.Extraction_Rules
             set { _ExtractAll = value; }
         }
 
+        private bool _Cumulative;
+        [Description("Se True, os valores extraídos serão acrescentados a uma lista de valores com o mesmo já existente. (Apenas se ExtractAll=True)")]
+        public bool Cumulative
+        {
+            get { return _Cumulative; }
+            set { _Cumulative = value; }
+        }
+
         private bool _EscapeEspecial;
         [Description("Se True, os caracteres especiais na string da Regex serão 'escapados'. Ex: '.' para '\\.'")]
         public bool EscapeEspecial
@@ -65,7 +73,7 @@ namespace LoadTestLib.Extraction_Rules
 
             if (matches.Count == 0)
             {
-                if (_ExtractAll)
+                if (_ExtractAll && !_Cumulative)
                 {
                     e.WebTest.Context.Add(this.ContextParameterName + "_Nr", matches.Count);
                     e.WebTest.Context.Add(this.ContextParameterName + "_Gr", 0);
@@ -76,13 +84,18 @@ namespace LoadTestLib.Extraction_Rules
 
             if (_ExtractAll)
             {
+                int start = 0;
+                if (_Cumulative && e.WebTest.Context.ContainsKey(this.ContextParameterName + "_Nr"))
+                {
+                    start = int.Parse(e.WebTest.Context[this.ContextParameterName + "_Nr"].ToString());
+                }
                 for (int i = 0; i < matches.Count; i++)
                 {
                     string name = this.ContextParameterName;
-                    if (matches.Count > 1) name = name + "_" + (i + 1);
+                    if (matches.Count > 1 || _Cumulative) name = name + "_" + (start + i + 1);
                     addContextParameters(matches[i], name, e);
                 }
-                e.WebTest.Context.Add(this.ContextParameterName + "_Nr", matches.Count);
+                e.WebTest.Context.Add(this.ContextParameterName + "_Nr", matches.Count + start);
                 e.WebTest.Context.Add(this.ContextParameterName + "_Gr", matches[0].Groups.Count - 1);
             }
             else

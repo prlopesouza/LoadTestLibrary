@@ -36,13 +36,12 @@ namespace LoadTestLib.Request_Plugins
                 {
                     _Value = e.WebTest.Context[_Value.Replace("{{", "").Replace("}}", "")].ToString();
                 }
-                e.WebTest.Context["TESTE DEBUG"] = _Name + " = " + _Value;
-                e.Request.Cookies.Add(new System.Net.Cookie(_Name, _Value, "/", "hrevenda.eudora.com.br"));
             }
             catch(Exception ex)
             {
                 e.WebTest.Context["EXCEPTION"] = ex.Message;
             }
+
             base.PreRequest(sender, e);
         }
     }
