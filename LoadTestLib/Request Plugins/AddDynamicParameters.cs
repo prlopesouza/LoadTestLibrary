@@ -43,12 +43,13 @@ namespace LoadTestLib.Request_Plugins
 
             int count = int.Parse(e.WebTest.Context[_ParameterVariable + "_Nr"].ToString());
 
-            if (count != 0)
+            if (count != 0 && e.Request.Method.Equals("POST"))
             {
 
                 int g_count = int.Parse(e.WebTest.Context[_ParameterVariable + "_Gr"].ToString());
 
-                FormPostHttpBody body = e.Request.Body as FormPostHttpBody;
+                FormPostHttpBody body = new FormPostHttpBody();
+                if (e.Request.Body!=null) body = e.Request.Body as FormPostHttpBody;
 
                 Regex rx = new Regex("\\{\\{([^{}]+)\\}\\}");
 
