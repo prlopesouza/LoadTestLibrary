@@ -44,10 +44,12 @@
   <ItemGroup>
     <Compile Include="Auxiliary\AuxFunctions.cs" />
     <Compile Include="Auxiliary\RandomCreditCardNumberGenerator.cs" />
+    <Compile Include="Extraction Rules\ExtractAllInput.cs" />
     <Compile Include="Extraction Rules\ExtractRandomRegex.cs" />
     <Compile Include="Extraction Rules\ExtractRandomSelectOption.cs" />
     <Compile Include="Extraction Rules\ExtractResponseCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Request Plugins\AddInputs.cs" />
     <Compile Include="Request Plugins\AddDynamicParameters.cs" />
     <Compile Include="Request Plugins\AddCookie.cs" />
     <Compile Include="Request Plugins\GetVarByIndex.cs" />
