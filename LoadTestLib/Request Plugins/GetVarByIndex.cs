@@ -69,14 +69,22 @@ namespace LoadTestLib.Request_Plugins
                 {
                     ind = e.WebTest.Context[_Index.Replace("{{", "").Replace("}}", "")].ToString();
                 }
+
                 string val = "";
+
+                string varName = "";
                 if (_useGroups)
                 {
-                    val = e.WebTest.Context[_Variable + "_" + ind + "_g" + _groupIndex].ToString();
+                    varName = _Variable + "_" + ind + "_g" + _groupIndex;
                 }
                 else
                 {
-                    val = e.WebTest.Context[_Variable + "_" + ind].ToString();
+                    varName = _Variable + "_" + ind;
+                }
+
+                if (e.WebTest.Context.ContainsKey(varName))
+                {
+                    val = e.WebTest.Context[varName].ToString();
                 }
 
                 e.WebTest.Context[_ResultVariable] = val;
@@ -96,13 +104,20 @@ namespace LoadTestLib.Request_Plugins
                     ind = e.WebTest.Context[_Index.Replace("{{", "").Replace("}}", "")].ToString();
                 }
                 string val = "";
+
+                string varName = "";
                 if (_useGroups)
                 {
-                    val = e.WebTest.Context[_Variable + "_" + ind + "_g" + _groupIndex].ToString();
+                    varName = _Variable + "_" + ind + "_g" + _groupIndex;
                 }
                 else
                 {
-                    val = e.WebTest.Context[_Variable + "_" + ind].ToString();
+                    varName = _Variable + "_" + ind;
+                }
+
+                if (e.WebTest.Context.ContainsKey(varName))
+                {
+                    val = e.WebTest.Context[varName].ToString();
                 }
 
                 e.WebTest.Context[_ResultVariable] = val;

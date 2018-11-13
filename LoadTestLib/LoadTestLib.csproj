@@ -55,6 +55,7 @@
     <Compile Include="Request Plugins\GetVarByIndex.cs" />
     <Compile Include="Request Plugins\Increment.cs" />
     <Compile Include="Request Plugins\PaymentData.cs" />
+    <Compile Include="Request Plugins\RandomNumber.cs" />
     <Compile Include="Request Plugins\UnixTime.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -92,7 +92,8 @@ namespace LoadTestLib.Extraction_Rules
                 for (int i = 0; i < matches.Count; i++)
                 {
                     string name = this.ContextParameterName;
-                    if (matches.Count > 1 || _Cumulative) name = name + "_" + (start + i + 1);
+                    //if (matches.Count > 1 || _Cumulative) name = name + "_" + (start + i + 1);
+                    name = name + "_" + (start + i + 1);
                     addContextParameters(matches[i], name, e);
                 }
                 e.WebTest.Context.Add(this.ContextParameterName + "_Nr", matches.Count + start);
