@@ -31,6 +31,14 @@ namespace PromocaoZaad_Plugin
             set { _ExcludeOption = value; }
         }
 
+        private bool _IncludeEmpty;
+        [Description("Se a opção vazia do select será considerada.")]
+        public bool IncludeEmpty
+        {
+            get { return _IncludeEmpty; }
+            set { _IncludeEmpty = value; }
+        }
+
         public override void Extract(object sender, ExtractionEventArgs e)
         {
             string response = e.Response.BodyString;
@@ -38,7 +46,7 @@ namespace PromocaoZaad_Plugin
             Regex rxSelect = new Regex("<select[^>]+[name|id]=\"" + _SelectName + "\"[^>]*>([\\s\\S]+?<\\/select>)");
             if (!_ExcludeOption.Equals("")) _ExcludeOption = "(?!" + _ExcludeOption + ")";
             Regex rxOption = new Regex("<option[^>]+value=\"" + _ExcludeOption + "([^\"]+)");
-            
+            if (IncludeEmpty) rxOption = new Regex("<option[^>]+value=\"" + _ExcludeOption + "([^\"]*)");
 
             MatchCollection select = rxSelect.Matches(response);
             if (select.Count==0)

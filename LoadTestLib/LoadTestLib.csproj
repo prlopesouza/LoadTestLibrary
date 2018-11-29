@@ -49,12 +49,14 @@
     <Compile Include="Extraction Rules\ExtractRandomSelectOption.cs" />
     <Compile Include="Extraction Rules\ExtractResponseCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Request Plugins\AddConditionalParameter.cs" />
     <Compile Include="Request Plugins\AddInputs.cs" />
     <Compile Include="Request Plugins\AddDynamicParameters.cs" />
     <Compile Include="Request Plugins\AddCookie.cs" />
     <Compile Include="Request Plugins\GetVarByIndex.cs" />
     <Compile Include="Request Plugins\Increment.cs" />
     <Compile Include="Request Plugins\PaymentData.cs" />
+    <Compile Include="Request Plugins\RandomValues.cs" />
     <Compile Include="Request Plugins\RandomNumber.cs" />
     <Compile Include="Request Plugins\UnixTime.cs" />
   </ItemGroup>

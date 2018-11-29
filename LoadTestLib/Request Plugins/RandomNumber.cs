@@ -40,10 +40,16 @@ namespace LoadTestLib.Request_Plugins
         {
             Random rd = new Random();
             int n = rd.Next(_minValue, _maxValue + 1);
-            int aux = n;
-            while (aux==n) {
-                n = rd.Next(_minValue, _maxValue + 1);
+
+            if (_maxValue != _minValue)
+            {
+                int aux = n;
+                while (aux == n)
+                {
+                    n = rd.Next(_minValue, _maxValue + 1);
+                }
             }
+
             e.WebTest.Context[_contextVariable] = n;
 
             base.PostRequest(sender, e);
