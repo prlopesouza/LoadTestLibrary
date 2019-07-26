@@ -42,6 +42,8 @@ namespace LoadTestLib.Request_Plugins
                 e.WebTest.Context["EXCEPTION"] = ex.Message;
             }
 
+            e.Request.Cookies.Add(new System.Net.Cookie(_Name, _Value));
+
             base.PreRequest(sender, e);
         }
     }

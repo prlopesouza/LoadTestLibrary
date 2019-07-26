@@ -16,6 +16,9 @@ namespace LoadTestLib.Auxiliary
 
             Random rnd = new Random();
             string semente = rnd.Next(100000000, 999999999).ToString();
+            string aux = semente;
+            while (aux==semente) semente = rnd.Next(100000000, 999999999).ToString();
+
 
             for (int i = 0; i < 9; i++)
                 soma += int.Parse(semente[i].ToString()) * multiplicador1[i];
